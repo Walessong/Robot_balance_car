@@ -211,11 +211,11 @@ ESP32是ESP8266的升级版，主要特点包括由单核升级为双核，主�
 
 <img src="img/cam5.png" title="" alt="" style="zoom:50%;">
 
-![](img/cam2.png)
+![](img/cam2.png = 200x)
 
 <img src="img/cam6.png" title="" alt="" style="zoom:50%;">
 
-![](img/cam3.png)
+![](img/cam3.png = 200x)
 
 代码修改完成后，点击上传按钮，等待编译完成。在上传完成后，点击右上角的串口监视器，同时按下开发板的复位键。开发板将尝试连接WiFi，当连接成功后会输出一个HTTP地址，该地址为视频流链接。
 
