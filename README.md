@@ -205,25 +205,25 @@ e.g.[4.小车拼装教程_哔哩哔哩_bilibili](https://www.bilibili.com/video/
 
 ESP32是ESP8266的升级版，主要特点包括由单核升级为双核，主频从80MHz提升至240MHz，并新增了蓝牙模块和TF卡扩展支持。这些改进使得ESP32在性能和可玩性上有了质的提升。建议购买硬件时，将烧录器一并购买，以简化后续程序上传的过程。
 
-<img src="img/cam1.jpeg" alt="" style="zoom:25%;">
+<img src="img/cam1.jpeg" alt="" width=200>
 
 将下载整理的代码进行必要的修改后，即可上传。具体操作是打开文件夹中的`esp32_camera_mjpeg_multiclient`，启动Arduino IDE，修改WiFi连接信息，即搜索`wifi.begin`，在此处设置WiFi名称与密码，还可根据需求设置刷新帧率（FPS），可将其调整为适合实际需求的值。
 
-<img src="img/cam5.png" title="" alt="" style="zoom:50%;">
+<img src="img/cam5.png" title="" alt="" width=200>
 
-![](img/cam2.png = 200x)
+<img src="img/cam2.png" title="" alt="" width=200>
 
-<img src="img/cam6.png" title="" alt="" style="zoom:50%;">
+<img src="img/cam6.png" title="" alt="" width=200>
 
-![](img/cam3.png = 200x)
+<img src="img/cam3.png" title="" alt="" width=200>
 
 代码修改完成后，点击上传按钮，等待编译完成。在上传完成后，点击右上角的串口监视器，同时按下开发板的复位键。开发板将尝试连接WiFi，当连接成功后会输出一个HTTP地址，该地址为视频流链接。
 
-<img src="img/cam4.png" title="" alt="" style="zoom:50%;">
+<img src="img/cam4.png" title="" alt="" width=200>
 
 查看串口监视器获取的 HTTP 地址，在浏览器中打开，即可查看ESP32 Camera的实时画面。
 
-<img src="img/cam7.png" title="" alt="" style="zoom:25%;">
+<img src="img/cam7.png" title="" alt="" width=200>
 
 ---
 
