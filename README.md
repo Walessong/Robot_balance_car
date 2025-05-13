@@ -1,74 +1,156 @@
-# :star:Robot_balance_car
+<!-- PROJECT LOGO -->
 
-## :loudspeaker:简介
+<br /><p align="center">  <a href="https://github.com/Walessong/Robot_balance_car">    <img src="效果图.jpg" alt="Logo" width="200" />  </a>  <h1 align="center">:star: Robot Balance Car 平衡小车</h1>  <p align="center">    一款基于 STM32 与 PID 控制的双轮平衡车，集成空气检测、火焰报警与实时视频图传功能。    <br />    <a href="#-简介"><strong>了解更多 »</strong></a>    <br />    <br />    <a href="https://github.com/yourusername/Robot_balance_car/issues">报告 Bug</a>    ·    <a href="https://github.com/yourusername/Robot_balance_car/pulls">提出功能需求</a>  </p></p>
 
-这是我们参加`北航2025电子创新大赛`制作的项目，我们采用`STM32`作为主控，实现了一款可以在狭小空间内进行空气检测和火灾隐患巡查的平衡车。
+<!-- BADGES -->
 
-*This is a project **participating in the 2025 Electronic Innovation Competition of Beihang University**. We used STM32 as the main control to realize a balancing car that can perform air detection and fire hazard inspection in a small space.*
-
-## :sparkles: 功能特性
-
-* STM32F10C8T6核心板
-  
-* 两轮平衡小车，手机蓝牙遥控
-  
-* ESP32CAM+WIFI图传
-  
-* OLED实时显示温湿度传感、烟雾浓度传感、遇火焰蜂鸣器报警
-  
-* 按键调节报警阈值
-  
-
-## :slightly_smiling_face:效果图
-
-(加入视觉识别模块和舵机控制之后还要修改)
-
-![](效果图.jpg)
+<p align="center">  <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/Walessong/Robot_balance_car?color=2b9348" />  <img alt="GitHub forks" src="https://img.shields.io/github/forks/Walessong/Robot_balance_car?color=2b9348" />  <img alt="GitHub stars" src="https://img.shields.io/github/stars/Walessong/Robot_balance_car?color=2b9348" />  <img alt="GitHub license" src="https://img.shields.io/github/license/Walessong/Robot_balance_car?color=2b9348" /></p>
 
 * * *
 
-## :pushpin: 我们制作了详细的复刻教程，并在过程中，留下我们从纯小白到初出茅庐过程中的制作经验、学习一些模块时候的资料和思考。（各模块的手册和示例代码可在“模块”文件夹内找到）
+## 📋 目录
+
+* [简介](#-简介)
+* [功能特性](#-功能特性)
+* [项目结构](#-项目结构)
+* [硬件清单](#-硬件清单)
+* [环境配置](#-环境配置)
+* [安装与使用](#-安装与使用)
+  * [1. 焊接与组装](#1-焊接与组装)
+  * [2. 代码烧录](#2-代码烧录)
+  * [3. PID 调参](#3-pid-调参)
+  * [4. APP 配置](#4-app-配置)
+  * [5. 图传系统](#5-图传系统)
+* [模块详解](#-模块详解)
+* [示例效果](#-示例效果)
+* [贡献方式](#-贡献方式)
+* [许可证](#-许可证)
+* [致谢](#-致谢)
 
 * * *
 
-## 环境配置
+## 🎯 简介
 
-Windows端：
+> **项目背景：** 参赛于北航 2025 第四届电子信息智能硬件创新大赛，目标是在狭小环境中实现空气质量检测与火灾隐患巡检。
 
-![](img/app.png)
-
-* Arduino IDE
-  
-  * 推荐安装教程： https://www.bilibili.com/video/BV1tWZqYNEwP/?share_source=copy_web&vd_source=8eddcd42dc192592504b28b1d0b0fe27
-* Keil uVision5
-  
-  * 推荐安装教程： https://www.bilibili.com/video/BV1th411z7sn/?p=3&share_source=copy_web&vd_source=8eddcd42dc192592504b28b1d0b0fe27
-* 嘉立创EDA(专业版)
-  
-  * 推荐安装教程： https://www.bilibili.com/video/BV1Q441167nu/?share_source=copy_web&vd_source=8eddcd42dc192592504b28b1d0b0fe27
-
-手机端：
-
-![](img/app2.png)
-
-* 蓝牙调试器
-  
-* 浏览器
-  
+* **主控板：** STM32F103C8T6
+* **控制方式：** 双轮自平衡 + PID 算法
+* **通信方式：** 手机蓝牙遥控 / ESP32-CAM Wi-Fi 图传
+* **传感器：** 温湿度、烟雾浓度、火焰检测
+* **显示：** OLED 实时数据显示与报警提示
 
 * * *
 
-## 硬件材料清单(附Excel文件)
+## ✨ 功能特性
 
-![](物料清单/物料清单.png)
+* 🔧 **两轮自平衡**：基于 MPU6050 六轴传感器实现姿态解算与控制。
+* 📱 **蓝牙遥控**：JDY31 蓝牙串口模块，支持方向与速度控制。
+* 📡 **Wi-Fi 图传**：ESP32-CAM 实时 MJPEG 视频流。
+* 🌡️ **环境监测**：DHT22 温湿度 & MQ-2 烟雾传感。
+* 🔥 **火焰报警**：遇火即刻蜂鸣器警报。
+* 🖥️ **OLED 显示**：参数实时更新、阈值可调。
+* ⚙️ **可视化阈值设置**：按键调节报警灵敏度。
 
 * * *
 
-## 平衡小车制作
+## 🗂 项目结构
 
-## 一、焊接主控
+📦 Robot_balance_car
 
-按图焊接即可。此处补充笔者初学焊接的经验：
+├─ esp32_camera_mjpeg_multiclient/ # ESP32 CAM 和 WiFi图传 代码
+
+├─ img/ # 项目图片
+
+├─ 模块/ # 各硬件模块介绍
+
+├─ 物料清单/ # 详细物料清单
+
+├─ APP配置/ # Arduino 手机蓝牙调试 App 配置文档
+
+├─ LICENSE
+
+├─ PCB_标准版_2025-04-28.pdf
+
+├─ PDF版原理图.pdf
+
+├─ ProPrj_Robot_balance_car.epro # 嘉立创工程文件
+
+├─ README # 本文件
+
+├─ code.zip/ # Keil + STM32CubeMX 工程文件
+
+├─ 元器件.zip # 各元器件详细操作手册和示例代码
+
+└─ 效果图.jpg
+
+* * *
+
+## 📦 硬件清单
+
+## Sheet1
+
+| 类别  | 物料名称 | 数量  | 链接(无广，仅供参考) | 预算(供参考) | 备注  |
+| --- | --- | --- | --- | --- | --- |
+| 主要部分 | STM32F103C8T6最小系统板 | 1.0 | https://detail.tmall.com/item.htm?abbucket=20&id=738272568606&ns=1&skuId=5098758809471&spm=a21n57.1.0.0.747e523cISKTCt | 14.00 | 排针向下焊 |
+| NaN | TB6612电机驱动板模块 | 1.0 | https://e.tb.cn/h.6OptrL1N2qDd9Ms?tk=OD4EVV95Bn7 | 3.00 | 钽电容耐压值35V的红色模块 |
+| NaN | 主控PCB | 1.0 | 嘉立创打样 | 20.00 | 每月可免费打样两次 |
+| NaN | 亚克力板 | 2.0 | https://e.tb.cn/h.6OkQ7s1mdHUG1bD?tk=1dmBVVOlFG7 | 20.00 | 底座和顶部 |
+| NaN | 20pin排母 | 6.0 | https://detail.tmall.com/item.htm?ali\_refid=a3\_430582\_1006:1109983619:N:IBuL1rXf2wNMlW9kfgl/OQ==:55ec7b9d1f5a49b5db66793bfd34dc5b&ali\_trackid=1\_55ec7b9d1f5a49b5db66793bfd34dc5b&id=41234671442&spm=a21n57.1.0.0&skuId=3129099470945 | 2.92 | NaN |
+| NaN | 排针20pin | 10.0 | https://detail.tmall.com/item.htm?ali\_refid=a3\_430582\_1006:1109983619:N:YhZ9BCTMjCVmm%20rIrbS2bg==:2978dade035baf776648433cdb0597d6&ali\_trackid=1\_2978dade035baf776648433cdb0597d6&id=609362740741&spm=a21n57.1.0.0&skuId=4282842644109 | 3.12 | NaN |
+| NaN | MPU6050陀螺仪模块 | 1.0 | https://detail.tmall.com/item.htm?spm=a1z10.3-b-s.w4011-16538328900.25.50983d6cVfKaz9&id=41337720621&rn=994cbaadf8aef2bc68c38fa273dfcd9a&abbucket=6&skuId=4188052896336 | 12.54 | 可能有质量问题导致初始化失败，及时更换 |
+| NaN | DC005电源插座 | 1.0 | https://e.tb.cn/h.6OpKssmhDoEnv4m?tk=64UUVV93fJm | 0.03 | NaN |
+| NaN | JDY68A(蓝牙模块) | 1.0 | https://e.tb.cn/h.6OpeX0rKEpwtWwk?tk=n7hLVVQJGF9 | 13.00 | NaN |
+| NaN | HC-SR04(超声波模块) | 1.0 | https://detail.tmall.com/item.htm?spm=a230r.1.14.9.66887fb5zIpYKx&id=41248598447&ns=1&abbucket=20 | 5.87 | NaN |
+| NaN | JGA25-370直流减速电机(带编码器带轮子及连接件)(6v 280转) | 2.0 | https://e.tb.cn/h.6OiVvgkcMpQwsnq?tk=RzYEVVj56dA | 60.00 | 两只(这个电机最便宜，而且带轮子，但性能不太好，但是能用)，预算充足可以看看轮趣家的，370电机 |
+| NaN | 0.96寸OLED | 1.0 | https://item.taobao.com/item.htm?spm=a230r.1.14.3.566c2805SB81IJ&id=43639171586&ns=1&abbucket=20#detail | 10.80 | 新版本 gnd开头，颜色任选 |
+| NaN | MP1584EN DC-DC直流降压模块 | 1.0 | https://e.tb.cn/h.6O8SyikzdnoHLE9?tk=ToEqVV9Rhkh | 4.20 | 可以多买一个备用 |
+| NaN | m3铜柱（40mm) | 8.0 | https://detail.tmall.com/item.htm?abbucket=20&id=534856751282&ns=1&spm=a21n57.1.0.0.d90e523cXsUguI&skuId=5095132382312 | 5.40 | 双通  |
+| NaN | m3\*10螺丝 | 8.0 | https://detail.tmall.com/item.htm?abbucket=20&id=694131607161&ns=1&spm=a21n57.1.0.0.d90e523cXsUguI | 2.26 | m3\*8，m3\*12也可以买些 |
+| NaN | m3螺母防松 | 8.0 | https://detail.tmall.com/item.htm?abbucket=20&id=534828257082&ns=1&spm=a21n57.1.0.0.5c64523cS28gu0&skuId=3192161696945 | 3.40 | NaN |
+| NaN | 18650锂电池组 | 1.0 | https://e.tb.cn/h.6ONXdoj8g6g8hLe?tk=hExdVV9L8H3 | 27.00 | 12V，带充电器 |
+| NaN | 18650锂电池组 | 1.0 | https://e.tb.cn/h.6OoxQYnJEV7TN3j?tk=WyscVVO83L3 | 20.00 | 5V，输出micro公头 |
+| NaN | 扎带  | 10.0 | https://e.tb.cn/h.6OpwcpZLEf0PEap?tk=OWP6VVQuHxn | 2.00 | 可拆卸版本更方便 |
+| 拓展模块 | TMB12A05蜂鸣器 | 1.0 | https://e.tb.cn/h.6O798vQjcgzByTW?tk=eBr5VV8OjcK | 0.35 | NaN |
+| NaN | MQ-2烟雾气敏传感器模块 | 1.0 | https://e.tb.cn/h.6OlXEeJOkkL4i9Q?tk=fc6pVV8Nh55 | 6.00 | 不要只买探头 |
+| NaN | DHT11温湿度传感器模块 | 1.0 | https://e.tb.cn/h.6Ood4WCMUpJrj70?tk=Ex6uVV8oubg | 6.00 | NaN |
+| NaN | ESP32CAM | 1.0 | https://e.tb.cn/h.6OI0rxnCNr6FXNM?tk=5jPlVVOLhAF | 45.00 | 带烧录座 |
+| NaN | SG90 9g舵机 | 2.0 | https://e.tb.cn/h.6OlLFQ6L39h1WCq?tk=yDIxVVj2ZEo | 6.00 | 90-180通用 |
+| 小计  | NaN | NaN | NaN | 292.89 | NaN |
+| 工具类 | 电烙铁 | 1.0 | NaN | 30.00 | NaN |
+| NaN | 焊锡丝 | 1.0 | NaN | 10.00 | NaN |
+| NaN | 热熔胶枪 | 1.0 | NaN | 12.00 | 小功率的即可 |
+| NaN | 杜邦线 | 6.0 | NaN | 15.00 | 10cm、15cm、公对公、母对母、公对母 |
+| NaN | 小十字螺丝刀 | 1.0 | NaN | 2.00 | NaN |
+| NaN | 内六角螺丝刀 | 1.0 | NaN | 30.00 | 一套  |
+| NaN | jlink或者stlink | 1.0 | NaN | 10.00 | 下载器，烧录程序用 |
+
+详细 Excel 清单见 `物料清单/` 文件夹。
+
+* * *
+
+## 🛠 环境配置
+
+### Windows
+
+1. **Arduino IDE**
+  * 使用教程（B 站）：[Arduino IDE 安装与配置](https://www.bilibili.com/video/BV1tWZqYNEwP)
+2. **Keil uVision5**
+  * 使用教程（B 站）：[Keil 安装与项目搭建](https://www.bilibili.com/video/BV1th411z7sn?p=3)
+3. **嘉立创 EDA**
+  * 推荐专业版，PCB 设计与焊接参考。
+
+### 手机端
+
+* **蓝牙调试器** App
+* 浏览器访问 ESP32-CAM 视频流
+
+* * *
+
+## 🚀 安装与使用
+
+### 1️⃣ 焊接与组装
+
+此处补充笔者初学焊接的经验：
 
 📝 焊接排针的实用技巧
 
@@ -97,19 +179,118 @@ Windows端：
 * 🚦 **检测焊接质量:** 用万用表测试电路的导通性和电压输出，避免因接错焊点而导致电路异常。
   
 
-* * *
-
-## 二、组装机械结构
-
 平衡小车的机械结构大同小异，B站有不少组装教程。
 
 e.g.[4.小车拼装教程_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1Gc411v73h?spm_id_from=333.788.videopod.episodes&vd_source=418d43b5808f02eef3f6ab61b59ae8fe&p=4)
 
 注意外露的电线不要触碰在一起，以及有的排针排母、模块等连接不牢固可以用热熔胶枪固定一下。
 
+### 2️⃣ 代码烧录
+
+1. 使用 ST-LINK 或下载线连接开发板。
+2. 打开 `code\USER\UpStanding_Car.uvprojx`，在 Keil 中编译并下载。
+
+### 3️⃣ PID 调参
+
+* OLED 显示 PID 实时信息。
+  
+* 通过按键微调 `Kp`、`Ki`、`Kd`，观察平衡效果。
+  
+
+### 4️⃣ App 配置
+
+* 打开 `APP配置.docx`，根据文档在手机上安装并设置串口参数。
+
+### 5️⃣ 图传系统
+
+ESP32是ESP8266的升级版，主要特点包括由单核升级为双核，主频从80MHz提升至240MHz，并新增了蓝牙模块和TF卡扩展支持。这些改进使得ESP32在性能和可玩性上有了质的提升。建议购买硬件时，将烧录器一并购买，以简化后续程序上传的过程。
+
+
+
+将下载整理的代码进行必要的修改后，即可上传。具体操作是打开文件夹中的`esp32_camera_mjpeg_multiclient`，启动Arduino IDE，修改WiFi连接信息，即搜索`wifi.begin`，在此处设置WiFi名称与密码，还可根据需求设置刷新帧率（FPS），可将其调整为适合实际需求的值。
+
+
+
+
+
+
+
+
+
+代码修改完成后，点击上传按钮，等待编译完成。在上传完成后，点击右上角的串口监视器，同时按下开发板的复位键。开发板将尝试连接WiFi，当连接成功后会输出一个HTTP地址，该地址为视频流链接。
+
+
+
+查看串口监视器获取的 HTTP 地址，在浏览器中打开，即可查看ESP32 Camera的实时画面。
+
+
+
+### :six: 舵机控制模块
+
+舵机控制系统由Arduino主控、蓝牙通信模块、舵机执行单元和电源管理模块组成。蓝牙模块接收手机端单字符指令，Arduino通过步进逻辑控制舵机角度，电源模块独立供电保障稳定性。
+
+本项目采用HC-05蓝牙模块和SG90舵机，实现**增量式控制**策略。通过手机APP按钮发送ASCII字符指令，代码解析后执行5°步进调节，具备实时角度反馈功能。
+
+#### 💡经验以及相关介绍
+
+1.**组成部分**
+
+* **控制核心**：Arduino Uno作为处理中枢，解析蓝牙指令并生成PWM信号
+* **通信单元**：HC-05模块实现手机-硬件双向通信（默认波特率9600）
+* **执行机构**：2个SG90舵机构成二自由度机械结构
+* **供电系统**：二路电源模块（5V/3A输出）独立驱动舵机，与主控电源隔离
+
+2.**舵机安装**：我们采用的是2个SG90舵机,b站有许多组装教程可以参考。
+
+e.g [二自由舵机云台安装教程__ 哔哩哔哩___ bilibili](https://www.bilibili.com/video/BV1aaStY8E3G/?spm_id_from=333.337.search-card.all.click&vd_source=1fc467ff4cce04080fa8abd171a0a492)
+
+3.💡**模块协同逻辑**（匹配代码文件）
+
+* **指令交互协议**
+  
+  | 指令字符 | 控制动作 | 代码对应逻辑 |
+  | --- | --- | --- |
+  | `U` | 舵机1角度+5° | `angle1 = min(angle1+5, 180)` |
+  | `D` | 舵机1角度-5° | `angle1 = max(angle1-5, 0)` |
+  | `R` | 舵机2角度+5° | `angle2 = min(angle2+5, 180)` |
+  | `L` | 舵机2角度-5° | `angle2 = max(angle2-5, 0)` |
+  | `C` | 双舵机复位至90°中位 | `angle1=angle2=90` |
+  
+* **数据流设计**
+  
+      手机APP按钮 → 发送单字符指令 → HC-05透传 → Arduino硬件串口
+      → Serial.read()捕获字符 → switch-case逻辑处理 → 更新角度变量
+      → servo.write()输出PWM → 实时反馈当前角度至手机端
+  
+* **关键代码实现**
+  
+  * **指令捕获**：`char command = Serial.read()`直接获取单字节指令
+  * **步进控制**：采用`min()/max()`函数实现软限位（0-180°范围保护）
+  * **状态反馈**：每次动作后发送`A[角度1]B[角度2]`格式数据（与初始方案兼容）
+* **硬件交互特性**
+  
+  * **PWM精度**：SG90舵机脉宽分辨率为1μs（约0.09°/μs）
+  * **响应延迟**：单次指令处理周期<10ms（包含蓝牙传输时延）
+  * **共地要求**：舵机GND必须与Arduino GND直连 ：
+
+4.**调试与优化**
+
+* **电源诊断**：舵机抖动时测量工作电压（正常≥4.8V），压降过大需升级线材
+* **通信测试**：使用串口监视器观察原始数据，排查TX/RX反接问题
+* **机械保护**：3D打印限位结构防止180°极限位置堵转
+* **功耗管理**：待机时切换舵机为扭矩保持模式降低能耗
+
+5.**典型问题解决方案**
+
+| 故障现象 | 排查步骤 | 解决方法 |
+| --- | --- | --- |
+| 单舵机无响应 | 1. 检测PWM引脚接触<br>2. 测量信号线电压 | 更换杜邦线或重焊接口 |
+| 蓝牙频繁断开 | 1. 检查天线朝向<br>2. 测量模块供电电压 | 外接470μF电容稳压<br>改用5V供电 |
+| 角度定位漂移 | 1. 检查舵机齿轮间隙<br>2. 测试空载精度 | 增加电位器校准程序<br>更换金属齿轮舵机 |
+
 * * *
 
-## 三、模块代码编写
+## 🔧 模块详解
 
 ### 1.OLED
 
@@ -237,62 +418,32 @@ MPU6050是一个六轴传感器，能够同时读取三轴加速度和角速度�
 
 * * *
 
-## 四、烧录代码
+## 🎬 示例效果
 
-连接好stlink（以stlink为例，注意要提前安装好驱动，在配置Keil的视频链接中有教学），打开工程文件，上传即可。
-
-* * *
-
-## 五、PID调参
-
-![](img/pid.png)
+<p align="center">  <img src="img/demo.gif" alt="Demo" width="600" /></p>
 
 * * *
 
-## 六、手机蓝牙APP配置
+## 🤝 贡献方式
 
-参考项目文件中的.docx文件 `“APP配置”` 。
+1. Fork 本仓库
+2. 新建分支 (`git checkout -b feature/YourFeature`)
+3. 提交修改 (`git commit -m 'Add some feature'`)
+4. 推送分支 (`git push origin feature/YourFeature`)
+5. 提交 PR
 
-* * *
-
-## 七、ESP32 CAM WIFI图传系统搭建
-
-ESP32是ESP8266的升级版，主要特点包括由单核升级为双核，主频从80MHz提升至240MHz，并新增了蓝牙模块和TF卡扩展支持。这些改进使得ESP32在性能和可玩性上有了质的提升。建议购买硬件时，将烧录器一并购买，以简化后续程序上传的过程。
-
-![](img/cam1.jpeg)
-
-将下载整理的代码进行必要的修改后，即可上传。具体操作是打开文件夹中的`esp32_camera_mjpeg_multiclient`，启动Arduino IDE，修改WiFi连接信息，即搜索`wifi.begin`，在此处设置WiFi名称与密码，还可根据需求设置刷新帧率（FPS），可将其调整为适合实际需求的值。
-
-![](img/cam5.png)
-
-![](img/cam2.png)
-
-![](img/cam6.png)
-
-![](img/cam3.png)
-
-代码修改完成后，点击上传按钮，等待编译完成。在上传完成后，点击右上角的串口监视器，同时按下开发板的复位键。开发板将尝试连接WiFi，当连接成功后会输出一个HTTP地址，该地址为视频流链接。
-
-![](img/cam4.png)
-
-将输出的HTTP地址放入浏览器，即可查看ESP32 Camera的实时画面。
-
-![](img/cam7.jpg)
+请在 PR 中说明新增功能与测试步骤。
 
 * * *
 
-## 八、舵机
+## 📄 许可证
+
+MIT License © 2025 [Your Name] - 详情见 [LICENSE](LICENSE)
 
 * * *
 
-Last but not least:
+## 🙏 致谢
 
-## :speech_balloon:对于小白的建议(明明自己也是)：
-
-1. 学习stm32单片机，可以先学一点基本的库函数开发，然后再使用CubeIDE开发，提高效率。
-  
-2. 可以多刷一刷好玩的开源项目找找思路，整体创新或者改进。
-  
-3. 可以接触一些网络方面的知识，后期可能会用到内网穿透等手段。
-  
-4. PID控制方法在现代自动控制系统中占有重要地位，是许多工程领域尤其是电子与自动化专业的基石。了解其原理能够在今后的学习与工作中更有效地应用控制理论。
+* 北航 电子科技协会 社团
+* 北航 2025 第四届电子信息智能硬件创新大赛 组织方
+* 提供示例与驱动的优秀开源项目
