@@ -194,7 +194,8 @@ e.g.[4.小车拼装教程_哔哩哔哩_bilibili](https://www.bilibili.com/video/
 
 * OLED 显示 PID 实时信息。
   
-* 通过按键微调 `Kp`、`Ki`、`Kd`，观察平衡效果。
+* 通过按键微调 `Kp`、`Ki`、`Kd`，观察平衡效果。
+* <img src="pid.png" alt="" width=400>
   
 
 ### 4️⃣ App 配置
