@@ -1,6 +1,6 @@
 <!-- PROJECT LOGO -->
 
-<br /><p align="center">  <a href="https://github.com/Walessong/Robot_balance_car">    <img src="效果图.jpg" alt="Logo" width="200" />  </a>  <h1 align="center">:star: Robot Balance Car 平衡小车</h1>  <p align="center">    一款基于 STM32 与 PID 控制的双轮平衡车，集成空气检测、火焰报警与实时视频图传功能。    <br />    <a href="#-简介"><strong>了解更多 »</strong></a>    <br />    <br />    <a href="https://github.com/Walessong/Robot_balance_car/issues">报告 Bug</a>    ·    <a href="https://github.com/Walessong/Robot_balance_car/pulls">提出功能需求</a>  </p></p>
+<br /><p align="center">  <a href="https://github.com/Walessong/Robot_balance_car">    <img src="最终效果图.jpg" alt="Logo" width="500" />  </a>  <h1 align="center">:star: Robot Balance Car 平衡小车</h1>  <p align="center">    一款基于 STM32 与 PID 控制的双轮平衡车，集成空气检测、火焰报警与实时视频图传功能。    <br />    <a href="#-简介"><strong>了解更多 »</strong></a>    <br />    <br />    <a href="https://github.com/Walessong/Robot_balance_car/issues">报告 Bug</a>    ·    <a href="https://github.com/Walessong/Robot_balance_car/pulls">提出功能需求</a>  </p></p>
 
 <!-- BADGES -->
 
